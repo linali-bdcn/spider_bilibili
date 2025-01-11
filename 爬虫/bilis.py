@@ -3,7 +3,7 @@ import re
 
 #url地址,请求头headers
 url = "https://www.bilibili.com/video/BV1454y187Er/"  # 替换为目标 URL
-cookie = "buvid4=592A5351-4318-B4D2-8737-FAFC6CADD10004748-023071120-Z%2FAbw9J6z9%2FgOsaYTan8rA%3D%3D; buvid_fp_plain=undefined; is-2022-channel=1; CURRENT_BLACKGAP=0; enable_web_push=DISABLE; FEED_LIVE_VERSION=V_WATCHLATER_PIP_WINDOW3; header_theme_version=CLOSE; CURRENT_QUALITY=80; PVID=2; home_feed_column=5; fingerprint=a4198d298f91370295c925c865c83789; buvid_fp=1169451459e0e123e8292c2ae8640a2c; buvid3=AC4714D5-9AEB-BDFB-D891-DDB2408AC8B544600infoc; b_nut=1728471644; _uuid=C5C14C54-BB5F-CCD3-EC65-DE9D2FF484A145253infoc; browser_resolution=1762-866; rpdid=|(J~RYu|Rk~R0J'u~JJk))mlR; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzY1MTA4ODcsImlhdCI6MTczNjI1MTYyNywicGx0IjotMX0.B8e5OpUS1nPdts4M0JQwI1fyEcVAJRZfumFphPYBuzw; bili_ticket_expires=1736510827; b_lsid=5D591097D_19440BC21D5; bmg_af_switch=1; bmg_src_def_domain=i1.hdslb.com; SESSDATA=9f0a08de%2C1751804941%2Cfc918%2A11CjBYHjuxZC7aE3fw9KZDNOxSXp7BUObWXNMdyh124KN-fia275PdMKoK23UZZ7xTHe4SVjM4VkR3MXc3TXU2WG1EWFNmclNTeHh5ZnpCSkRXd0tZSEJhZnVEblFaZEpZQ2FzUWY4ZVR4QlZMdWFvUFVnSUo2V1ZpbFRkYUFRcW81WF9aLVU2a0NBIIEC; bili_jct=31834e7dc2fea06fdd1d037b351feebc; DedeUserID=700258188; DedeUserID__ckMd5=a2f0bc6e77c418a7; sid=4zb8hqdo; bp_t_offset_700258188=1019694002791776256; CURRENT_FNVAL=4048" 
+cookie = "emtpy" 
 
 headers = {
         # Referer 防盗链 告诉服务器你请求链接是从哪里跳转过来的
@@ -25,8 +25,7 @@ print(title)
 
 
 url = "https://www.bilibili.com/video/BV1454y187Er/"  # 替换为目标 URL
-cookie = "buvid4=592A5351-4318-B4D2-8737-FAFC6CADD10004748-023071120-Z%2FAbw9J6z9%2FgOsaYTan8rA%3D%3D; buvid_fp_plain=undefined; is-2022-channel=1; CURRENT_BLACKGAP=0; enable_web_push=DISABLE; FEED_LIVE_VERSION=V_WATCHLATER_PIP_WINDOW3; header_theme_version=CLOSE; CURRENT_QUALITY=80; PVID=2; home_feed_column=5; fingerprint=a4198d298f91370295c925c865c83789; buvid_fp=1169451459e0e123e8292c2ae8640a2c; buvid3=AC4714D5-9AEB-BDFB-D891-DDB2408AC8B544600infoc; b_nut=1728471644; _uuid=C5C14C54-BB5F-CCD3-EC65-DE9D2FF484A145253infoc; browser_resolution=1762-866; rpdid=|(J~RYu|Rk~R0J'u~JJk))mlR; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzY1MTA4ODcsImlhdCI6MTczNjI1MTYyNywicGx0IjotMX0.B8e5OpUS1nPdts4M0JQwI1fyEcVAJRZfumFphPYBuzw; bili_ticket_expires=1736510827; b_lsid=5D591097D_19440BC21D5; bmg_af_switch=1; bmg_src_def_domain=i1.hdslb.com; SESSDATA=9f0a08de%2C1751804941%2Cfc918%2A11CjBYHjuxZC7aE3fw9KZDNOxSXp7BUObWXNMdyh124KN-fia275PdMKoK23UZZ7xTHe4SVjM4VkR3MXc3TXU2WG1EWFNmclNTeHh5ZnpCSkRXd0tZSEJhZnVEblFaZEpZQ2FzUWY4ZVR4QlZMdWFvUFVnSUo2V1ZpbFRkYUFRcW81WF9aLVU2a0NBIIEC; bili_jct=31834e7dc2fea06fdd1d037b351feebc; DedeUserID=700258188; DedeUserID__ckMd5=a2f0bc6e77c418a7; sid=4zb8hqdo; bp_t_offset_700258188=1019694002791776256; CURRENT_FNVAL=4048" 
-
+cookie = "emtpy
 
 通过访问requests‘https://www.bilibili.com/video/BV1rtkiYUEvy/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&vd_source=86fde7c1b0fc380df5d84bf3e669c96e’，也就是"https://www.bilibili.com/video/BV1rtkiYUEvy/"转成txt文件后匹配
 
