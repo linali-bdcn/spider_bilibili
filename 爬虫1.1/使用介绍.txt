@@ -1,7 +1,0 @@
-作者:linali_bdcn
-	
-使用方法    传输自己的响应头(headers)中的Cookie和User-Agent
-		   还需传一个目标视频的url地址链接
-		   通过Google的开发者工具得到响应头
-
-等待过后可以获得此视频的音频和视频文件。
