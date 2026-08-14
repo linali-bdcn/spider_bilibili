@@ -1,74 +1,96 @@
-# B站视频下载器 · 全能工具箱
+# B站视频下载器 + 提取工具箱（v5.0.0）
 
-基于 `yt-dlp` 的 B站视频/音频下载工具，附带字幕提取、封面下载、评论爬取等实用功能。GUI 界面由 Tkinter 构建。
+基于 `yt-dlp` 的 B站视频下载与内容提取工具，提供 Tkinter 图形界面。
 
-## 功能概述
+## 功能
 
-| 模块 | 说明 |
-|---|---|
-| **视频下载** | 支持最佳画质、仅音频(MP3)、720P、480P 四种模式 |
-| **列表解析** | 自动识别分P / 合集(UGC Season) / 收藏夹，支持导出 TXT |
-| **任务队列** | 批量管理，支持暂停/跳过/右键排序(置顶/上移/下移/删除) |
-| **提取工具箱** | AI 字幕提取(SRT/TXT)、高清封面下载、批量评论爬取 |
-| **Cookie 授权** | 浏览器自动获取 或 Netscape 文件导入，突破清晰度/风控限制 |
+- **视频下载** — 支持单个视频、多P合集、合集列表，自定义画质/格式
+- **字幕提取** — 提取 CC 字幕并保存为 SRT 或 TXT 格式
+- **封面提取** — 下载视频封面图片
+- **评论抓取** — 抓取视频热门评论
+- **Cookie 管理** — 支持三种模式：浏览器自动提取 / 本地文件 / 无 Cookie
+- **下载队列** — 暂停/取消/重试，实时进度展示
+- **全局日志** — 提取操作日志集中显示
 
 ## 环境要求
 
-### Python 包
+- Python 3.9+
+- ffmpeg（可选，但**强烈建议**，用于合并高清视频的音视频流）
+
+### 关于 ffmpeg
+
+本仓库**不含 ffmpeg**（体积约 260MB，太大不适合放源码库）。程序会自动在
+`ffmpeg-7.1.1-essentials_build/bin/` 目录查找 `ffmpeg.exe`。
+
+获取方式（二选一）：
+
+1. **下载含 ffmpeg 的完整发布包** — 前往 [Releases](../../releases) 下载
+   `TK-B站下载器-v5.0.0-full.zip`，解压即用。
+2. **手动下载 ffmpeg** — 从 [gyan.dev](https://www.gyan.dev/ffmpeg/builds/)
+   下载 `ffmpeg-release-essentials.zip`，解压后将文件夹重命名为
+   `ffmpeg-7.1.1-essentials_build` 放到项目根目录即可（也可只把 `ffmpeg.exe`
+   放进 `ffmpeg-7.1.1-essentials_build/bin/`）。
+
+## 安装
 
 ```bash
-pip install yt-dlp requests
+pip install -r requirements.txt
 ```
 
-### FFmpeg
-
-视频合并与音频提取所必需。程序启动时自动检测：
-
-1. 项目 `ffmpeg/` 目录下的 `ffmpeg.exe` + `ffprobe.exe`（优先）
-2. 系统 PATH 中的 FFmpeg
-
-[FFmpeg 官网下载](https://ffmpeg.org/download.html)
-
-## 快速开始
-
-### 源码运行
+## 快速启动
 
 ```bash
-python v5.3.py
+python main.py
 ```
 
-### 发行版（Windows）
+或双击 `启动文件.bat`。
 
-下载打包好的 zip，解压后双击 `B站视频下载器.exe`，已内置 FFmpeg，开箱即用。
+## Cookie 配置
 
-## Cookie 配置（重要）
+程序需要 B站 Cookie 才能下载高清视频和访问会员内容。
 
-字幕提取、高画质下载、合集解析均需要有效的 B站 Cookie，否则将被风控拦截。
+**三种模式：**
 
-推荐方式：**浏览器插件导出**
+| 模式 | 说明 |
+|------|------|
+| 浏览器自动提取 | 从本地浏览器（Chrome/Edge/Firefox）自动读取 B站 Cookie |
+| 本地文件 | 从项目根目录 `bilibili_cookies.txt` 读取 Netscape 格式 Cookie |
+| 无 Cookie | 不发送 Cookie（部分视频可能受限） |
 
-1. 在 Chrome/Edge 安装插件 **Get cookies.txt LOCALLY**
-2. 打开 B站并登录账号，点击插件图标 → Export
-3. 将导出的 `cookies.txt` 保存到本地
-4. 在软件 **设置** 页选择 "本地Netscape文件" 并加载该文件
+**获取 Cookie 文件的方法：**
 
-备选方式：**浏览器自动获取**（需先关闭浏览器）
+1. 安装浏览器扩展 [Get cookies.txt LOCALLY](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc)
+2. 访问 B站并登录
+3. 点击扩展图标，选择 Export → Export As
+4. 将导出的文件重命名为 `bilibili_cookies.txt`，放到项目根目录
 
-## 自行打包
+## 目录结构
 
-```bash
-# 1. 确保 ffmpeg/ 目录下有 ffmpeg.exe 和 ffprobe.exe
-
-pip install pyinstaller
-pyinstaller B站视频下载器.spec
 ```
-
-产物在 `dist/B站视频下载器/`，分发整个文件夹即可。
+├── main.py                          # 入口
+├── requirements.txt
+├── 启动文件.bat
+├── bili_downloader/                 # 核心包
+│   ├── __init__.py
+│   ├── config.py                    # 配置读写
+│   ├── cookie_provider.py           # Cookie 获取
+│   ├── bili_api.py                  # B站 API 封装
+│   ├── extra_extractor.py           # 字幕/封面/评论提取
+│   ├── download_manager.py          # 下载引擎（yt-dlp）
+│   └── ui/                          # GUI 子包
+│       ├── __init__.py
+│       ├── app.py                   # 主窗口
+│       ├── download_tab.py          # 下载面板
+│       ├── tools_tab.py             # 工具面板
+│       ├── settings_tab.py          # 设置面板
+│       ├── queue_panel.py           # 队列树
+│       ├── list_window.py           # 合集列表弹窗
+│       └── log_panel.py             # 日志面板
+├── docs/
+│   └── MAINTENANCE.md               # 维护说明书
+└── legacy/                          # 历史单文件版本（V3/V4/V5）
+```
 
 ## 免责声明
 
-本工具仅供个人学习和研究使用。使用者应遵守 B站用户协议及相关法律法规。禁止用于商业用途或侵犯他人权益的行为。作者不对任何滥用行为承担法律责任。
-
-## 作者
-
-linali_bdcn · [源码仓库](https://github.com/linali-bdcn/spider_bilibili)
+本工具仅供个人学习与交流使用。请遵守 B站用户协议，勿用于商业用途或侵犯他人权益。

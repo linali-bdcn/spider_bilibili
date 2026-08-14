@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.spec
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# 项目特定
+logs/
+bili_downloader_config.json
+bilibili_cookies.txt
+*.part
+*.ytdl
+
+# ffmpeg 体积大，不进源码库，单独下载（见 README / Releases）
+ffmpeg-7.1.1-essentials_build/
